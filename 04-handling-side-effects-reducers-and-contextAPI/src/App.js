@@ -13,7 +13,7 @@ function App() {
     if (storedUserLoggedInInformation === '1') {
       setIsLoggedIn(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-depszin
   }, []);
 
   const loginHandler = (email, password) => {

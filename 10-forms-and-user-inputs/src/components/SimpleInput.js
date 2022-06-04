@@ -6,14 +6,26 @@ const SimpleInput = (props) => {
   const [enteredName, setEnteredName] = useState('');
   /* If you need the entered value, after every keystroke, for instant validation or something else, useState is better */
 
-  const [enteredNameIsValid, setEnteredNameIsValid] = useState(true);
+  const [enteredNameIsValid, setEnteredNameIsValid] = useState(false);
+  const [enteredNameTouched, setEnteredNameTouched] = useState(false);
 
   const nameInputChangeHandler = event => {
     setEnteredName(event.target.value);
   }
 
+  const nameInputBlurHandler = event => {
+    setEnteredNameTouched(true);
+
+    if (enteredName.trim() === '') {
+      setEnteredNameIsValid(false);
+      return;
+    }
+  };
+
   const formSubmissionHandler = event => {
     event.preventDefault();
+
+    setEnteredNameTouched(true);
 
     if (enteredName.trim() === '') {
       setEnteredNameIsValid(false);
@@ -31,14 +43,22 @@ const SimpleInput = (props) => {
     setEnteredName('');
   }
 
-  const nameInputClasses = enteredNameIsValid ? 'form-control' : 'form-control invalid';
+  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
+
+  const nameInputClasses = nameInputIsInvalid ? 'form-control invalid' : 'form-control';
 
   return (
     <form onSubmit={formSubmissionHandler}>
       <div className={nameInputClasses}>
         <label htmlFor='name'>Your Name</label>
-        <input ref={nameInputRef} type='text' id='name' onChange={nameInputChangeHandler} value={enteredName} />
-        {!enteredNameIsValid && <p className='error-text'>Name must not be empety!</p>}
+        <input
+          ref={nameInputRef}
+          type='text'
+          id='name'
+          onChange={nameInputChangeHandler}
+          onBlur={nameInputBlurHandler}
+          value={enteredName} />
+        {nameInputIsInvalid && <p className='error-text'>Name must not be empety!</p>}
       </div>
       <div className="form-actions">
         <button>Submit</button>

@@ -27,7 +27,7 @@ const SimpleInput = (props) => {
     const enteredValue = nameInputRef.current.value;
     console.log(enteredValue);
 
-    // nameInputRef.current.value = ''; => NOT IDEAL, DON'T MANIPULATE THE DOM!
+    /* nameInputRef.current.value = ''; => NOT IDEAL, DON'T MANIPULATE THE DOM! */
     setEnteredName('');
   }
 

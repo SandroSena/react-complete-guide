@@ -1,66 +1,60 @@
-import { useRef, useState } from 'react';
+/* useRef = If you only interessed in get the value once, when the formn is submitted, a useRef is better */
+
+/* useState = If you need the entered value, after every keystroke, for instant validation or something else, useState is better */
+
+import { useState } from 'react';
 
 const SimpleInput = (props) => {
-  const nameInputRef = useRef();
-  /* If you only interessed in get the value once, when the formn is submitted, a useRef is better */
   const [enteredName, setEnteredName] = useState('');
-  /* If you need the entered value, after every keystroke, for instant validation or something else, useState is better */
-
-  const [enteredNameIsValid, setEnteredNameIsValid] = useState(false);
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
 
-  const nameInputChangeHandler = event => {
+  const enteredNameIsValid = enteredName.trim() !== '';
+  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
+
+  const nameInputChangeHandler = (event) => {
     setEnteredName(event.target.value);
-  }
+  };
 
   const nameInputBlurHandler = event => {
     setEnteredNameTouched(true);
-
-    if (enteredName.trim() === '') {
-      setEnteredNameIsValid(false);
-      return;
-    }
   };
 
-  const formSubmissionHandler = event => {
+  const formSubmissionHandler = (event) => {
     event.preventDefault();
 
     setEnteredNameTouched(true);
 
-    if (enteredName.trim() === '') {
-      setEnteredNameIsValid(false);
+    if (!enteredNameIsValid) {
       return;
     }
 
-    setEnteredNameIsValid(true);
-
     console.log(enteredName);
 
-    const enteredValue = nameInputRef.current.value;
-    console.log(enteredValue);
-
-    /* nameInputRef.current.value = ''; => NOT IDEAL, DON'T MANIPULATE THE DOM! */
+    // nameInputRef.current.value = ''; => NOT IDEAL, DON'T MANIPULATE THE DOM
     setEnteredName('');
-  }
+    setEnteredNameTouched(false);
+  };
 
-  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
-
-  const nameInputClasses = nameInputIsInvalid ? 'form-control invalid' : 'form-control';
+  const nameInputClasses = nameInputIsInvalid
+    ? 'form-control invalid'
+    : 'form-control';
 
   return (
     <form onSubmit={formSubmissionHandler}>
       <div className={nameInputClasses}>
         <label htmlFor='name'>Your Name</label>
         <input
-          ref={nameInputRef}
           type='text'
           id='name'
           onChange={nameInputChangeHandler}
           onBlur={nameInputBlurHandler}
-          value={enteredName} />
-        {nameInputIsInvalid && <p className='error-text'>Name must not be empety!</p>}
+          value={enteredName}
+        />
+        {nameInputIsInvalid && (
+          <p className='error-text'>Name must not be empty.</p>
+        )}
       </div>
-      <div className="form-actions">
+      <div className='form-actions'>
         <button>Submit</button>
       </div>
     </form>

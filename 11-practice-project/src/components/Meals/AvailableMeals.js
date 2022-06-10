@@ -68,11 +68,13 @@ const AvailableMeals = () => {
   ));
 
   return (
-    <section className={classes.meals}>
-      <Card>
-        <ul>{mealsList}</ul>
-      </Card>
-    </section>
+    <>
+      <section className={classes.meals}>
+        <Card>
+          <ul>{mealsList}</ul>
+        </Card>
+      </section>
+    </>
   );
 };
 

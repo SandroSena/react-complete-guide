@@ -15,7 +15,7 @@ const AvailableMeals = () => {
       const response = await fetch('https://react-complete-guide-htt-d4027-default-rtdb.firebaseio.com/meals.json');
 
       if (!response.ok) {
-        throw new Error('Something went wrong!!!');
+        throw new Error('Something went wrong!');
       }
 
       const responseData = await response.json();

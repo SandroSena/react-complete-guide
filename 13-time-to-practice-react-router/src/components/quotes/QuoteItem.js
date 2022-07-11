@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import classes from './QuoteItem.module.css';
 
 const QuoteItem = (props) => {
@@ -9,7 +10,7 @@ const QuoteItem = (props) => {
         </blockquote>
         <figcaption>{props.author}</figcaption>
       </figure>
-      <a className='btn'>
+      <a className='btn' key='btn'>
         View Fullscreen
       </a>
     </li>

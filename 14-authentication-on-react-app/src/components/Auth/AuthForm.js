@@ -22,6 +22,17 @@ const AuthForm = () => {
 
     if (isLogin) {
     } else {
+      /** Using Async Await
+            await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB9mpMcOAyR3WduJzaorcQKsy_casrvs_Q',
+              {
+                method: 'POST',
+                body: JSON.stringify({
+                  email: enteredEmail,
+                  password: enteredPassword,
+                  returnSecureToken: true,
+                }),
+              });
+       */
       fetch(
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB9mpMcOAyR3WduJzaorcQKsy_casrvs_Q',
         {

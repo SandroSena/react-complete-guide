@@ -25,7 +25,7 @@ body {
 .btn {
   text-decoration: none;
   background-color: teal;
-  color: white;
+  color: #fff;
   border-radius: 4px;
   padding: 0.75rem 1.5rem;
   border: 1px solid teal;

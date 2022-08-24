@@ -52,5 +52,5 @@ body {
 .btn--flat:hover,
 .btn--flat:active {
   background-color: teal;
-  color: white;
+  color: #fff;
 }

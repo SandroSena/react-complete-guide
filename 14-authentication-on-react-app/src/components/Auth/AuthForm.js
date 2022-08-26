@@ -29,11 +29,9 @@ const AuthForm = () => {
     setIsLoading(true);
     let url;
     if (isLogin) {
-      url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB9mpMcOAyR3WduJzaorcQKsy_casrvs_Q';
+      url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`;
     } else {
-      url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB9mpMcOAyR3WduJzaorcQKsy_casrvs_Q';
+      url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}`;
     }
     fetch(url, {
       method: 'POST',
@@ -61,7 +59,9 @@ const AuthForm = () => {
         }
       })
       .then((data) => {
-        const expirationTime = new Date(new Date().getTime() + (+data.expiresIn * 1000));
+        const expirationTime = new Date(
+          new Date().getTime() + +data.expiresIn * 1000
+        );
         authCtx.login(data.idToken, expirationTime.toISOString());
         history.replace('/');
       })

@@ -12,7 +12,7 @@
   border-radius: 50%;
   border: 6px solid #008080;
   border-color: teal transparent #008080 transparent;
-  animation: spinner 1.2s linear infinite;
+  animation: spinner 1.3s linear infinite;
 }
 @keyframes spinner {
   0% {

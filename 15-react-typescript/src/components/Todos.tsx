@@ -1,9 +1,9 @@
-const Todos = () => {
+const Todos: React.FC<{ items: string[] }> = (props) => {
   return (
     <ul>
-      <li>Learn React</li>
-      <li>Learn TypeScript</li>
-      <li>Just Learn Things</li>
+      {props.items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
     </ul>
   );
 };
